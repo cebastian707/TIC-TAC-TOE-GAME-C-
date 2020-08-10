@@ -1,6 +1,5 @@
 # TIC-TAC-TOE-GAME-C-
 TIC TAC TOE GAME USING MINIMAX Algorthim
-//HEADER FLILE
 #pragma once
 #include<iostream>
 #pragma warning(disable:4996)
@@ -73,6 +72,35 @@ public:
 		}
 		return 1;
 	}
+	void AI_Goes_First() {
+		
+			cout << " ***************** " << endl;
+			cout << " Human VS Computer " << endl;
+			cout << " -----------------\n " << endl;
+			cout << endl;
+			displayboard();
+			cout << endl;
+			while (ISTIE(Player::none) == false)
+			{
+				Computer_Movie();
+				if (CHECK_WINNER(Player::COMPUTER) == true)
+				{
+					cout << endl;
+					cout << setw(35) << " I won bitch as Human!" << endl;
+					exit(0);
+				}
+
+				player_one();
+				if (CHECK_WINNER(Player::PLAYER_ONE) == true)
+				{
+					cout << " Fuck you you won! " << endl;
+					break;
+				}
+			
+
+			}
+		
+	}
 	int Full_Board()const;
 	void choose();
 	void Computer_Movie();
@@ -104,6 +132,7 @@ public:
 
 
 //FILE TO WORK WITH THE FUNCTIONS IN THE HEADER FILE
+/*CPP file that works with the hearder file*/
 /*CPP file that works with the hearder file*/
 
 
@@ -138,12 +167,13 @@ void Tic_Tac_Toe::choose() {
 	cout << " Welcome to Tic Tac Toe 2.0 ! " << endl;
 	cout << " **************************** " << endl;
 	cout << " 1.Human Vs Human " <<endl;
-	cout << " 2. AI Vs Human " << endl;
+	cout << " 2. Human Vs AI " << endl;
+	cout << " 3. AI (goes first) Vs Human " << endl;
 	cout << " ****************************\n " << endl;
 	cout << endl;
 	cout << " What Do you want to play?: ";
 	cin >> num;
-	while (num < 0  || num > 2 || !cin)
+	while (num < 0  || num > 3 || !cin)
 	{
 		cin.clear();
 		cin.ignore('300', '\n');
@@ -156,6 +186,8 @@ void Tic_Tac_Toe::choose() {
 	case 1:Game();
 		break;
 	case 2:AI_GAME();
+		break;
+	case 3:AI_Goes_First();
 		break;
 	}	
 
@@ -239,6 +271,7 @@ void Tic_Tac_Toe::AI_GAME() {
 	cout << endl;
 	while (ISTIE(Player::none) == false)
 	{
+
 		player_one();
 		if (CHECK_WINNER(Player::PLAYER_ONE) == true)
 		{
@@ -252,6 +285,7 @@ void Tic_Tac_Toe::AI_GAME() {
 			cout << setw(35) << " I won bitch as Human!" << endl;
 			exit(0);
 		}
+
 
 	}
 }
@@ -568,6 +602,11 @@ bool Tic_Tac_Toe::CHECK_WINNER(Player player)
 		return false;
 	}
 }
+
+
+
+
+
 
 
 // MAIN FILE
