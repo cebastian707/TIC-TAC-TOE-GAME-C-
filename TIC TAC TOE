@@ -380,6 +380,11 @@ void Tic_Tac_Toe::Game() {
 		cout << endl;
 		cout << endl;
 		player_Two();
+	        if (CHECK_WINNER(Player::PLAYER_TWO) == true)
+		{
+			cout << setw(30) << " Player two won " << endl;
+		}
+
 		cout << endl;
 	} 
 	
