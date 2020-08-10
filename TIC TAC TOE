@@ -8,12 +8,14 @@ TIC TAC TOE GAME USING MINIMAX Algorthim
 #include"Tic_Tac_Toe.h"
 #include<algorithm>
 #include<limits.h>
-
+/*Program Done By Cebastian Santiago Header File using the struct as the minimax which that will the computers move after we check the min and max return that
+other then we got a couple private members two which are too Fill the board Num_Rows and Num_Cols the enum class filler the char board*/
 using namespace std;
 
 class Tic_Tac_Toe
 {
 private:
+	//use two create the board
 	int static const Num_Rows = 3;
 	int static const Num_Cols = 3;
 	struct Minimax
@@ -21,6 +23,7 @@ private:
 		int row = 0;
 		int col = 0;
 	};
+	//this is what we fill the board with
 	enum class Player
 	{
 		none = '-',
@@ -28,7 +31,9 @@ private:
 		PLAYER_TWO = 'O',
 		COMPUTER = 'O'
 	};
+	// create board using the enum class player
 	Player Board[Num_Rows][Num_Cols];
+	//this returns the optimal place to put the computer move using the minsearch functiona and the maxsearch function
 	Minimax Move() {
 		int score = numeric_limits<int>::max();
 		Minimax Moves;
@@ -53,6 +58,7 @@ private:
 		return Moves;
 	}
 public:
+	//this member public function checks if the game board is full or not
 	int checkspaces(Player play) {
 		for (int row = 0; row < Num_Rows; row++)
 		{
@@ -80,6 +86,7 @@ public:
 	bool ISTIE(Player play);
 	void Game();
 	bool CHECK_WINNER(Player);
+	//this is a display board to let the user know where to place his move on the board by entering numbers 1-9
 	void displayboard() {
 		for (int row = 2; row < Num_Rows; row++)
 		{
@@ -97,6 +104,8 @@ public:
 
 
 //FILE TO WORK WITH THE FUNCTIONS IN THE HEADER FILE
+/*CPP file that works with the hearder file*/
+
 
 #pragma warning(disable:4996)
 #include<iostream>
@@ -106,7 +115,8 @@ public:
 #include<limits>
 
 using namespace std;
-
+/*Constructor that Fills the board with this '-' none
+*/
 int Tic_Tac_Toe::Full_Board()const {
 	for (int row = 0; row < Num_Rows; row++)
 	{
@@ -121,7 +131,8 @@ int Tic_Tac_Toe::Full_Board()const {
 	return 1;
 }
 
-
+/* Let's the user pick between playing againest another player or againest the AI
+*/
 void Tic_Tac_Toe::choose() {
 	int num = 0;
 	cout << " Welcome to Tic Tac Toe 2.0 ! " << endl;
@@ -149,20 +160,25 @@ void Tic_Tac_Toe::choose() {
 	}	
 
 }
-
+/* Function checks all posible outcomes for the Maximizer 
+*/
 int Tic_Tac_Toe::maxsearch() {
+	//if player one has won return there score
 	if (CHECK_WINNER(Player::PLAYER_ONE))
 	{
 		return 10;
 	}
+	//if computer has won returns there score
 	else if (CHECK_WINNER(Player::COMPUTER))
 	{
 		return -10;
 	}
+	//returns a tie if no one one
 	else if (ISTIE(Player::none))
 	{
 		return 0;
 	}
+		//Goes through the board and grabs the maxium value
 		int score = numeric_limits<int>::min();
 		for (int row = 0; row < Num_Rows; row++)
 		{
@@ -179,20 +195,24 @@ int Tic_Tac_Toe::maxsearch() {
 		return score;
 	
 }
-
+//Function checks all possible outcomes for the Minimizer
 int Tic_Tac_Toe::minsearch() {
+	//if player one has won return there score
 	if (CHECK_WINNER(Player::PLAYER_ONE))
 	{
 		return 10;
 	}
+	//if computer has won returns there score
 	else if (CHECK_WINNER(Player::COMPUTER))
 	{
 		return -10;
 	}
+	//returns a tie if no one one
 	else if (ISTIE(Player::none))
 	{
 		return 0;
 	}
+	//Goes through the board and grabs the minimum value
 	int score = numeric_limits<int>::max();
 	for (int row = 0; row < Num_Rows; row++)
 	{
@@ -209,7 +229,7 @@ int Tic_Tac_Toe::minsearch() {
 	return score;
 }
 
-
+//this plays the AI function
 void Tic_Tac_Toe::AI_GAME() {
 	cout << " ***************** " << endl;
 	cout << " Human VS Computer " << endl;
@@ -235,9 +255,9 @@ void Tic_Tac_Toe::AI_GAME() {
 
 	}
 }
-
+//computer move using the minimax function
 void Tic_Tac_Toe::Computer_Movie() {
-	cout << " My Move ";
+	cout << " My Move Bitch: ";
 	Minimax moves = Move();
 	cout << moves.row << moves.col << endl;
 	Board[moves.row][moves.col] = Player::COMPUTER;
@@ -245,7 +265,7 @@ void Tic_Tac_Toe::Computer_Movie() {
 }
 
 
-
+//construtor that fills the board with the eumn class none
 Tic_Tac_Toe::Tic_Tac_Toe() {
 	for (int row = 0; row < Num_Rows; row++)
 	{
@@ -255,7 +275,7 @@ Tic_Tac_Toe::Tic_Tac_Toe() {
 		}
 	}
 }
-
+//this prints the board for the game we type cast this becuase were using enum class and we call it in computer move and two other member functions 
 void Tic_Tac_Toe::print_Board() {
 	
 	for (int row = 0; row < Num_Rows; row++)
@@ -281,7 +301,7 @@ void Tic_Tac_Toe::print_Board() {
 
 
 
-
+//member funtion checks if its a tie
 bool Tic_Tac_Toe::ISTIE(Player tie) {
 
 	if (Board[0][0] != tie && Board[0][1] != tie && Board[0][2] != tie && Board[1][0] != tie && Board[1][1] != tie && Board[1][2] != tie && Board[2][0] != tie && Board[2][1] != tie && Board[2][2] != tie)
@@ -294,7 +314,7 @@ bool Tic_Tac_Toe::ISTIE(Player tie) {
 		return false;
 	}
 }
-
+//function that lets you play againest each user
 void Tic_Tac_Toe::Game() {
 	cout << " *********************** " << endl;
 	cout << " welcome to Tic Tac Toe " << endl;
@@ -330,7 +350,7 @@ void Tic_Tac_Toe::Game() {
 	} 
 	
 }
-
+//choose were too place player ones option onn the game board
 void Tic_Tac_Toe::player_one() {
 		int choose = 0;
 		cout << "Enter your chose player one as coordinate system ex(1-9): ";
@@ -422,7 +442,7 @@ void Tic_Tac_Toe::player_one() {
 	
 }
 
-
+//choose were two player two opition on the game board
 void Tic_Tac_Toe::player_Two() {
 
 	int choose = 0;
@@ -514,7 +534,7 @@ void Tic_Tac_Toe::player_Two() {
 
 }
 
-
+//function checks to see who won 
 bool Tic_Tac_Toe::CHECK_WINNER(Player player)
 {
 	for (int row = 0; row < Num_Rows; row++)
@@ -548,6 +568,8 @@ bool Tic_Tac_Toe::CHECK_WINNER(Player player)
 		return false;
 	}
 }
+
+
 // MAIN FILE
 #pragma warning(disable:4996)
 #include<iostream>
@@ -557,7 +579,7 @@ bool Tic_Tac_Toe::CHECK_WINNER(Player player)
 #include<limits>
 
 using namespace std;
-
+//we call the choose function which lets the user decide what to play
 int main()
 {
 	Tic_Tac_Toe A1;
@@ -565,7 +587,5 @@ int main()
 	
 	return 0;
 }
-
-
 
 
