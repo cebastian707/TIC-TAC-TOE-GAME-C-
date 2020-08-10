@@ -1,5 +1,5 @@
 # TIC-TAC-TOE-GAME-C-
-TIC TAC TOE GAME USING MINIMAX
+TIC TAC TOE GAME USING MINIMAX Algorthim
 //HEADER FLILE
 #pragma once
 #include<iostream>
