@@ -296,6 +296,13 @@ void Tic_Tac_Toe::Computer_Movie() {
 	cout << moves.row << moves.col << endl;
 	Board[moves.row][moves.col] = Player::COMPUTER;
 	print_Board();
+		if (ISTIE(Player::none) == true)
+	{
+		cout << endl;
+		cout << endl;
+		cout << setw(25) << " Tie " << endl;
+		exit(0);
+	}
 }
 
 
