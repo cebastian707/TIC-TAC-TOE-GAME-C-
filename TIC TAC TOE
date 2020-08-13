@@ -72,34 +72,58 @@ public:
 		}
 		return 1;
 	}
-	void AI_Goes_First() {
-		
-			cout << " ***************** " << endl;
-			cout << " Human VS Computer " << endl;
-			cout << " -----------------\n " << endl;
-			cout << endl;
-			displayboard();
-			cout << endl;
-			while (ISTIE(Player::none) == false)
-			{
-				Computer_Movie();
-				if (CHECK_WINNER(Player::COMPUTER) == true)
-				{
-					cout << endl;
-					cout << setw(35) << " I won bitch as Human!" << endl;
-					exit(0);
-				}
+	void AI_Goes_First();
+	void Computer_Choose() {
+		srand(time(NULL));
+		int place = 0;
+		place = rand() % 9;
+		if (place == 1)
+		{
+			Board[0][0] = Player::COMPUTER;
+			print_Board();
+		}
+		else if (place == 2)
+		{
+			Board[0][1] = Player::COMPUTER;
+			print_Board();
+		}
+		else if (place == 3)
+		{
+			Board[0][2] = Player::COMPUTER;
+			print_Board();
 
-				player_one();
-				if (CHECK_WINNER(Player::PLAYER_ONE) == true)
-				{
-					cout << " Fuck you you won! " << endl;
-					break;
-				}
-			
+		}
+		else if (place == 4)
+		{
+			Board[1][0] = Player::COMPUTER;
+			print_Board();
+		}
+		else if (place == 5)
+		{
+			Board[1][1] = Player::COMPUTER;
+			print_Board();
+		}
+		else if(place == 6)
+		{
+			Board[1][2] = Player::COMPUTER;
+			print_Board();
+		}
+		else if (place == 7)
+		{
+			Board[2][0] = Player::COMPUTER;
+			print_Board();
+		}
+		else if(place == 8)
+		{
+			Board[2][1] = Player::COMPUTER;
+			print_Board();
+		}
+		else if (place == 9)
+		{
+			Board[2][2] = Player::COMPUTER;
+			print_Board();
+		 }
 
-			}
-		
 	}
 	int Full_Board()const;
 	void choose();
@@ -107,7 +131,7 @@ public:
 	void AI_GAME();
 	int maxsearch();
 	int minsearch();
-    void player_one();
+    	void player_one();
 	void player_Two();
 	Tic_Tac_Toe();
 	void print_Board();
@@ -615,6 +639,41 @@ bool Tic_Tac_Toe::CHECK_WINNER(Player player)
 	}
 }
 
+void Tic_Tac_Toe::AI_Goes_First()
+{
+
+	cout << " ***************** " << endl;
+	cout << " Computer Vs Human " << endl;
+	cout << " -----------------\n " << endl;
+	cout << endl;
+	displayboard();
+	cout << endl;
+	Computer_Choose();
+	while (Full_Board() != 1)
+	{
+		player_one();
+		cout << endl;
+		cout << endl;
+		if (CHECK_WINNER(Player::PLAYER_ONE) == true)
+		{
+			cout << setw(25) << " Fuck you you won! " << endl;
+			break;
+		}
+
+
+
+		Computer_Movie();
+		cout << endl;
+		cout << endl;
+		if (CHECK_WINNER(Player::COMPUTER) == true)
+		{
+			cout << endl;
+			cout << setw(25) << " I won bitch as Human!" << endl;
+			break;
+		}
+	}
+
+}
 
 
 
